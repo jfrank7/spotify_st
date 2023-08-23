@@ -5,8 +5,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sb
 
 st.header('Spotify Top 10s')
 
