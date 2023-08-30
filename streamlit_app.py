@@ -6,6 +6,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
 import spotipy.util as util
 import pandas as pd
+import socket
 
 
 def get_spotify(submitted, client_id_input, client_secret_input):
@@ -24,6 +25,17 @@ def get_spotify(submitted, client_id_input, client_secret_input):
         secret = client_secret_input
 
     # Create a Spotipy client
+
+    # Attempt to close the socket if it's already open
+    try:
+        existing_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        existing_socket.connect(('localhost', 7777))
+        existing_socket.close()
+    except ConnectionRefusedError:
+        # The connection was refused, meaning the socket wasn't open.
+        print("No existing socket found on localhost:7777.")
+    except Exception as e:
+        print(f"An error occurred while closing the socket: {e}")
 
     # sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     #     client_id = cid,
