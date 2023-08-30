@@ -25,20 +25,20 @@ def get_spotify(submitted, client_id_input, client_secret_input):
 
     # Create a Spotipy client
 
-    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
-        client_id = cid,
-        client_secret = secret,
-        redirect_uri = 'http://localhost:7777/callback',
-        scope = 'user-top-read'
-        ))
-    
-    # token = util.prompt_for_user_token(
+    # sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     #     client_id = cid,
     #     client_secret = secret,
     #     redirect_uri = 'http://localhost:7777/callback',
     #     scope = 'user-top-read'
-    #     )
-    # sp = spotipy.Spotify(auth=token)
+    #     ))
+    
+    token = util.prompt_for_user_token(
+        client_id = cid,
+        client_secret = secret,
+        redirect_uri = 'http://localhost:7777/callback',
+        scope = 'user-top-read'
+        )
+    sp = spotipy.Spotify(auth=token)
     
     # Get the user's top 50 tracks
     results = sp.current_user_top_tracks(
