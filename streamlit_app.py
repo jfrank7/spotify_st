@@ -50,13 +50,13 @@ def get_spotify(submitted, client_id_input, client_secret_input):
     except Exception as e:
         print(f"An error occurred while closing the socket: {e}")
 
-    # Specify the desired host and port
-    host = 'localhost'
-    port = 7777 
+    # # Specify the desired host and port
+    # host = 'localhost'
+    # port = 7777 
 
-    # Create and bind the socket
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((host, port))
+    # # Create and bind the socket
+    # server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # server_socket.bind((host, port))
 
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
         client_id = cid,
