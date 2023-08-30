@@ -31,11 +31,32 @@ def get_spotify(submitted, client_id_input, client_secret_input):
         existing_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         existing_socket.connect(('localhost', 7777))
         existing_socket.close()
+        print("Closed the existing socket on localhost:7777.")
     except ConnectionRefusedError:
         # The connection was refused, meaning the socket wasn't open.
         print("No existing socket found on localhost:7777.")
     except Exception as e:
         print(f"An error occurred while closing the socket: {e}")
+        
+        # Attempt to close the socket if it's already open
+    try:
+        existing_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        existing_socket.connect(('localhost', 8501))
+        existing_socket.close()
+        print("Closed the existing socket on localhost:8501.")
+    except ConnectionRefusedError:
+        # The connection was refused, meaning the socket wasn't open.
+        print("No existing socket found on localhost:7777.")
+    except Exception as e:
+        print(f"An error occurred while closing the socket: {e}")
+
+    # Specify the desired host and port
+    host = 'localhost'
+    port = 7777 
+
+    # Create and bind the socket
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((host, port))
 
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
         client_id = cid,
